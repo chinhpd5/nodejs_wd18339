@@ -1,8 +1,20 @@
 const express = require('express')
+const { engine } = require('express-handlebars')
+const path = require('path');
+// import { engine } from 'express-handlebars';
+
+
+
 const app = express()
 const port = 3000
 
 app.use(express.json());
+
+// console.log(path.join(__dirname,'/views'));
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname,'/views'));
 
 const productList =[
   {id:1,name:"product1", price:300},
@@ -10,22 +22,24 @@ const productList =[
   {id:3,name:"abc", price:300}
 ]
 
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.render('home')
 })
 
 app.get('/product',(req,res)=>{
-    const query = req.query;
-    console.log(query);
-    //map, filter, reduce, some, every
-    const findProduct=  productList.filter(product => {
-      return product.name.includes(query.name)
-    } )
+    res.render('product')
+    // const query = req.query;
+    // console.log(query);
+    // //map, filter, reduce, some, every
+    // const findProduct=  productList.filter(product => {
+    //   return product.name.includes(query.name)
+    // } )
 
-    if(findProduct.length)
-      res.send(findProduct)
-    else
-      res.send(productList)
+    // if(findProduct.length)
+    //   res.send(findProduct)
+    // else
+    //   res.send(productList)
 })
 
 app.get('/product/:id',(req,res)=>{
@@ -98,6 +112,12 @@ app.get('/category',(req,res)=>{
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
+
+
+
+
+
+// b1
 
 // npm init -y
 
