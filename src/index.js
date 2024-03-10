@@ -3,8 +3,6 @@ const { engine } = require('express-handlebars')
 const path = require('path');
 // import { engine } from 'express-handlebars';
 
-
-
 const app = express()
 const port = 3000
 
@@ -12,8 +10,8 @@ app.use(express.json());
 
 // console.log(path.join(__dirname,'/views'));
 
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
+app.engine('hbs', engine({extname: '.hbs'}));
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'/views'));
 
 const productList =[
