@@ -1,14 +1,21 @@
-const express = require('express')
-const { engine } = require('express-handlebars')
-const path = require('path');
-// import { engine } from 'express-handlebars';
+// const express = require('express')
+// const { engine } = require('express-handlebars')
+// const path = require('path');
+
+import express from 'express';
+import {engine} from 'express-handlebars';
+import path,{dirname} from 'path';
+
+import { fileURLToPath } from 'url';
+
 
 const app = express()
 const port = 3000
 
 app.use(express.json());
 
-// console.log(path.join(__dirname,'/views'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.engine('hbs', engine({extname: '.hbs'}));
 app.set('view engine', 'hbs');
@@ -22,11 +29,11 @@ const productList =[
 
 
 app.get('/', (req, res) => {
-  res.render('home')
+  res.render('home',{name:"chinhpd"})
 })
 
 app.get('/product',(req,res)=>{
-    res.render('product')
+    res.render('product',{data: productList})
     // const query = req.query;
     // console.log(query);
     // //map, filter, reduce, some, every
