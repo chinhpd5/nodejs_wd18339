@@ -1,35 +1,11 @@
 import express from 'express'
 const router = express.Router();
+import {index, getById} from '../controllers/product.controller.js'
 
-const productList =[
-    {id:1,name:"product1", price:300},
-    {id:2,name:"abc", price:300},
-    {id:3,name:"abc", price:300}
-]
 //Lấy danh sách
-router.get('/',(req,res)=>{
-    res.render('product',{data: productList})
-    // const query = req.query;
-    // console.log(query);
-    // //map, filter, reduce, some, every
-    // const findProduct=  productList.filter(product => {
-    //   return product.name.includes(query.name)
-    // } )
-
-    // if(findProduct.length)
-    //   res.send(findProduct)
-    // else
-    //   res.send(productList)
-})
+router.get('/',index);
 //lấy sản phẩm theo id
-router.get('/:id',(req,res)=>{
-  let id = req.params.id;
-  const product = productList.find(item => item.id == id);
-  if(product)
-    res.send(product);
-  else
-    res.send("Không tìm thấy sản phẩm")
-})
+router.get('/:id',getById);
 //thêm mới sản phẩm
 router.post('/',(req,res)=>{
   const data = req.body;

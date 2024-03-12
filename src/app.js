@@ -23,6 +23,11 @@ app.set('views', path.join(__dirname,'/views'));
 
 
 //router
+
+// trung gian
+// import router from './routers/index.js';
+// router(app);
+
 import routerProduct from './routers/product.router.js';
 import routerCategory from './routers/category.router.js';
 import routerComon from './routers/comon.router.js';
@@ -30,6 +35,7 @@ import routerComon from './routers/comon.router.js';
 app.use('/product',routerProduct);
 app.use('/category',routerCategory);
 app.use('/',routerComon);
+//
 
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
