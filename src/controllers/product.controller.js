@@ -5,9 +5,10 @@ const productList = [
 ]
 
 import Product from '../models/product.model.js';
+import Category from '../models/category.model.js';
 // [GET] /product
 export function index(req, res) {
-    Product.find()
+    Product.find().populate('categoryId')
         .then(data =>{
             res.json(data);
         })
@@ -18,19 +19,32 @@ export function index(req, res) {
 //[GET] /product/:id
 export function getById(req, res) {
     let id = req.params.id;
-    const product = productList.find(item => item.id == id);
-    if (product)
-        res.send(product);
-    else
-        res.send("Không tìm thấy sản phẩm")
+    if(id){
+        Product.findById(id).populate('categoryId')
+            .then(data=>{
+                res.json(data);
+            })
+            .catch(()=>{
+                res.json({message: "Không tìm thấy sản phẩm"})
+            })
+    }else{
+        res.json({message:"Không nhận được id"})
+    }
 }
 //[POST] /product
 export function insert(req, res) {
-    const data = req.body;
-    if (data) {
-        productList.push(data)
+    const product = req.body;
+    if(product != {}){
+        Product.create(product)
+            .then(data=>{
+                res.json(data)
+            })
+            .catch(()=>{
+                res.json({message: "Có lỗi khi thêm sản phẩm"})
+            })
+    }else{
+        res.json({message: "Không nhận dược dữ liệu"})
     }
-    res.send(productList);
 }
 //[PUT] /product/:id
 export function update(req, res) {
