@@ -5,22 +5,28 @@
 import express from 'express';
 import {engine} from 'express-handlebars';
 import path,{dirname} from 'path';
-
 import { fileURLToPath } from 'url';
-
+import mongoose from 'mongoose';
 
 const app = express()
 const port = 3000
 
+//connect MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/WD18339')
+  .then(() => console.log('Connected!'));
+
 app.use(express.json());
 
+//View - đường dẫn tuyệt đối
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+//
 
+// view
 app.engine('hbs', engine({extname: '.hbs'}));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'/views'));
-
+//
 
 //router
 
@@ -40,25 +46,3 @@ app.use('/',routerComon);
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
-
-
-
-
-
-// b1
-
-// npm init -y
-
-// tạo index.js
-
-//npm i express
-
-//chạy node index.js
-
-// cài đặt nodemon: restart server khi save
-// npm i nodemon --save-dev
-
-// thêm "start": "nodemon src/index.js" 
-//vào script của file package.json
-
-// để chạy: npm start
