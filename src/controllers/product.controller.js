@@ -70,18 +70,18 @@ export function update(req, res) {
 }
 //[DELETE] /product/:id
 export function remove(req,res){
-    //b1: lấy id
-  const id = req.params.id;
-  // const isCheck = productList.some(item => item.id == id);
-  const index = productList.findIndex(item=> item.id ==id);
-
-  if(index>=0){
-    productList.splice(index,1);
-    res.send(productList)
-  }
-  else{
-    res.send('Không tìm thấy sản phẩm cần xóa')
-  }
-  //b2: kiểm tra id của sản phẩm đó có tồn tại hay k
-  //b3: xóa
+    const id = req.params.id;
+    // console.log(id);
+    if(id){
+        Product.findByIdAndDelete(id)
+            .then((data)=>{
+                res.json(data);
+            })
+            .catch(()=>{
+                res.json({message: "có lỗi khi xóa"});
+            })
+    }else{
+        res.json({message: "Không nhận được id"})
+    }
+    
 }
