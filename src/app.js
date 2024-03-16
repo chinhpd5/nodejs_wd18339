@@ -1,7 +1,3 @@
-// const express = require('express')
-// const { engine } = require('express-handlebars')
-// const path = require('path');
-
 import express from 'express';
 import {engine} from 'express-handlebars';
 import path,{dirname} from 'path';
@@ -15,6 +11,7 @@ const port = 3000
 mongoose.connect('mongodb://127.0.0.1:27017/WD18339')
   .then(() => console.log('Connected!'));
 
+// nhận dữ liệu khi post
 app.use(express.json());
 
 //View - đường dẫn tuyệt đối

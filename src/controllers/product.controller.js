@@ -48,29 +48,25 @@ export function insert(req, res) {
 }
 //[PUT] /product/:id
 export function update(req, res) {
-    //b1: lấy id
     const id = req.params.id;
-    //b2: lấy data
-    const data = req.body;
-    //b3: kiểm tra data có tồn tại
-    if (data != {}) {
-        // có dữ liệu
-        //b4: lấy index của sản phẩm theo id
-        if (id > 0) {
-            const index = productList.findIndex(item => item.id == id);
-            if (index >= 0) {
-                productList[index] = data;
-                res.send(productList);
-            } else {
-                res.send("không tìm thấy dữ liệu")
-            }
+    // console.log(id);
+    if(id){
+        const productData = req.body;
+        // console.log(productData);
+        if(productData != {}){
+            Product.findByIdAndUpdate(id,productData,{new:true})
+                .then((data)=>{
+                    res.json(data)
+                })
+                .catch(()=>{
+                    res.json({message: "có lỗi khi sửa"});
+                })
+        }else{
+            res.json({message: "Không nhận được dữ liệu"});
         }
-    } else {
-        res.send("Không nhận được dữ liệu")
+    }else{
+        res.json({message: "Không nhận được id"})
     }
-    //kiểm index
-    // thay thế data mới vào data cũ
-    // gửi lại array productList
 }
 //[DELETE] /product/:id
 export function remove(req,res){
