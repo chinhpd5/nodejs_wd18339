@@ -1,9 +1,3 @@
-const productList = [
-    { id: 1, name: "product1", price: 300 },
-    { id: 2, name: "abc", price: 300 },
-    { id: 3, name: "abc", price: 300 }
-]
-
 import Product from '../models/product.model.js';
 import Category from '../models/category.model.js';
 // [GET] /product
