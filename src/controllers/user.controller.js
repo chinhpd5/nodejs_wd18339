@@ -16,7 +16,6 @@ export function getById(){
 
 export function insert(req, res){
     const data = req.body;
-    console.log(data);
     if(data!={}){
         User.create(data)
             .then(newData=>{
@@ -26,7 +25,7 @@ export function insert(req, res){
                 })
             })
             .catch(err=>{
-                res.json({message: err})
+                res.status(500).json({message: err})
             })
     }
 }

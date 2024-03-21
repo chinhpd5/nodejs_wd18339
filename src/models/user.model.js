@@ -3,7 +3,8 @@ function validateEmail(textEmail){
     return /^\S+@\S+\.\S+$/.test(textEmail);
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+{
     name: {
         type: String,
         required: [true, "Không được để trống name"],
@@ -29,6 +30,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     }
-})
+},{timestamps:true}
+)
 
 export default mongoose.model("user",userSchema);

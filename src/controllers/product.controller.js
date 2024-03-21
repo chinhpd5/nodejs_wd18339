@@ -2,12 +2,16 @@ import Product from '../models/product.model.js';
 import Category from '../models/category.model.js';
 // [GET] /product
 export function index(req, res) {
-    Product.find().populate('categoryId')
+    const filter={};
+    const nameString = req.query.name;
+    if(nameString)
+        filter.name = nameString
+    Product.find(filter).populate('categoryId')
         .then(data =>{
-            res.json(data);
+            res.status(200).json(data);
         })
         .catch(()=>{
-            res.json({message:"Có lỗi khi lấy dữ liệu"});
+            res.status(500).json({message:"Có lỗi khi lấy dữ liệu"});
         })
 }
 //[GET] /product/:id
@@ -16,13 +20,13 @@ export function getById(req, res) {
     if(id){
         Product.findById(id).populate('categoryId')
             .then(data=>{
-                res.json(data);
+                res.status(200).json(data);
             })
             .catch(()=>{
-                res.json({message: "Không tìm thấy sản phẩm"})
+                res.status(400).json({message: "Không tìm thấy sản phẩm"})
             })
     }else{
-        res.json({message:"Không nhận được id"})
+        res.status(400).json({message:"Không nhận được id"})
     }
 }
 //[POST] /product
@@ -31,13 +35,13 @@ export function insert(req, res) {
     if(product != {}){
         Product.create(product)
             .then(data=>{
-                res.json(data)
+                res.status(201).json(data)
             })
             .catch(()=>{
-                res.json({message: "Có lỗi khi thêm sản phẩm"})
+                res.status(500).json({message: "Có lỗi khi thêm sản phẩm"})
             })
     }else{
-        res.json({message: "Không nhận dược dữ liệu"})
+        res.status(400).json({message: "Không nhận dược dữ liệu"})
     }
 }
 //[PUT] /product/:id
