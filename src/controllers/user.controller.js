@@ -1,7 +1,12 @@
 import User from '../models/user.model.js';
 
 export function getList(req,res){
-    User.find()
+    const nameString = req.query.name;
+    const filter ={};
+    if(nameString)
+        filter.name = nameString
+
+    User.find(filter)
         .then(data=>{
             res.json(data)
         })

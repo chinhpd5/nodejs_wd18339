@@ -3,12 +3,13 @@ import {engine} from 'express-handlebars';
 import path,{dirname} from 'path';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import 'dotenv/config'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 //connect MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/WD18339')
+mongoose.connect(process.env.CONNECTION_STRING_MONGODB)
   .then(() => console.log('Connected!'));
 
 // nhận dữ liệu khi post
