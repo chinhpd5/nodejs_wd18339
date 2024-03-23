@@ -1,4 +1,4 @@
-import {getList,getById,insert,update,remove} from '../controllers/user.controller.js';
+import {getList,getById,signup,update,remove} from '../controllers/user.controller.js';
 import express from 'express'
 const router = express.Router();
 
@@ -8,8 +8,9 @@ router.get('/',getList);
 // get theo id
 router.get('/:id',getById);
 
-// thêm mới user
-router.post('/',insert);
+// đăng kí
+//user/signup
+router.post('/signup',signup);
 
 //chỉnh sửa
 router.put('/:id',update)

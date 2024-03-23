@@ -24,11 +24,17 @@ const userSchema = new mongoose.Schema(
         validate:{
             validator: validateEmail,
             message: "Không đúng định dạng email"
-        }
+        },
+        required: [true,"Không được để trống email"]
     },
     gender: {
         type: Boolean,
         default: true
+    },
+    password: {
+        type: String,
+        required: [true, "Không được để trống password"],
+        minLength: [6,"Cần tối thiểu 6 kí tự"],
     }
 },{timestamps:true}
 )
