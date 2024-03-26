@@ -15,6 +15,8 @@ mongoose.connect(process.env.CONNECTION_STRING_MONGODB)
 // nhận dữ liệu khi post
 app.use(express.json());
 
+
+
 //View - đường dẫn tuyệt đối
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -30,8 +32,9 @@ import routerProduct from './routers/product.router.js';
 import routerCategory from './routers/category.router.js';
 import routerComon from './routers/comon.router.js';
 import routerUser from './routers/user.router.js'
+import checkAuth from './middleware/auth.js';
 
-app.use('/product',routerProduct);
+app.use('/product',checkAuth,routerProduct);
 app.use('/category',routerCategory);
 app.use('/user',routerUser);
 app.use('/',routerComon);

@@ -63,10 +63,6 @@ export async function signup(req, res){
 }
 // [POST] user/signin
 export async function signin(req,res){
-    // {
-    //     username: email,
-    //     password: "123456"
-    // }
     // lấy data
     const data = req.body;
     // kiểm tra username có tồn tại hay không
@@ -83,9 +79,9 @@ export async function signin(req,res){
 
     //sau khi đăng nhập thành công
     // tạo token từ thư viên jwt
-    const token = jwt.sign({ name: userExist.name, username: userExist.email }, process.env.KEY_SECRET, { expiresIn: "1h" })
+    const token = jwt.sign({ name: userExist.name, username: userExist.email }, process.env.KEY_SECRET, { expiresIn: "30m" })
 
-    console.log(token);
+    // console.log(token);
     if(token){
         userExist.password = undefined;
         res.status(201).json({
