@@ -1,12 +1,13 @@
 import {getList,getById,signup,update,remove,signin} from '../controllers/user.controller.js';
 import express from 'express'
+import checkAuth from '../middleware/auth.js';
 const router = express.Router();
 
 // danh sách user
-router.get('/',getList);
+router.get('/',checkAuth,getList);
 
 // get theo id
-router.get('/:id',getById);
+router.get('/:id',checkAuth,getById);
 
 // đăng kí
 //user/signup

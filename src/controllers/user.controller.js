@@ -79,7 +79,9 @@ export async function signin(req,res){
 
     //sau khi đăng nhập thành công
     // tạo token từ thư viên jwt
-    const token = jwt.sign({ name: userExist.name, username: userExist.email }, process.env.KEY_SECRET, { expiresIn: "30m" })
+    const token = jwt.sign({ name: userExist.name, username: userExist.email }, 
+        process.env.KEY_SECRET, 
+        { expiresIn: "2h" })
 
     // console.log(token);
     if(token){

@@ -1,12 +1,25 @@
 import Product from '../models/product.model.js';
 import Category from '../models/category.model.js';
+
+//[GET] /product/category/:id
+export function getProductByCateId(req,res){
+    const cateId = req.params.id;
+    console.log(cateId);
+    if(!cateId)
+        return res.status(400).json({message: "thiếu id Danh mục"});
+
+    Product.find({categoryId: cateId}).populate("categoryId")
+        .then(resData => res.status(200).json(resData))
+        .catch(err => res.status(500).json(err))
+}
+
 // [GET] /product
 export function index(req, res) {
     const filter={};
     const nameString = req.query.name;
     if(nameString)
         filter.name = nameString
-    Product.find(filter).populate('categoryId')
+        Product.find(filter).populate('categoryId')
         .then(data =>{
             res.status(200).json(data);
         })

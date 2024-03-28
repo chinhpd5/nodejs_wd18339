@@ -1,6 +1,7 @@
 import express from 'express'
 const router = express.Router();
-import {index, getById,insert,update,remove} from '../controllers/product.controller.js'
+import {index, getById,insert,update,remove,getProductByCateId} from '../controllers/product.controller.js'
+import checkAuth from '../middleware/auth.js';
 
 //Lấy danh sách
 router.get('/',index);
@@ -12,5 +13,7 @@ router.post('/',insert)
 router.put('/:id',update)
 //xóa sản phẩm
 router.delete('/:id',remove)
+//lấy danh sách sản phẩm theo danh mục
+router.get('/category/:id',getProductByCateId)
 
 export default router;

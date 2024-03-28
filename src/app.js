@@ -35,7 +35,7 @@ import routerUser from './routers/user.router.js'
 import checkAuth from './middleware/auth.js';
 
 app.use('/product',checkAuth,routerProduct);
-app.use('/category',routerCategory);
+app.use('/category',checkAuth,routerCategory);
 app.use('/user',routerUser);
 app.use('/',routerComon);
 //
