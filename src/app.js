@@ -32,10 +32,12 @@ import routerProduct from './routers/product.router.js';
 import routerCategory from './routers/category.router.js';
 import routerComon from './routers/comon.router.js';
 import routerUser from './routers/user.router.js'
+import routerCart from './routers/cart.router.js'
 import checkAuth from './middleware/auth.js';
 
 app.use('/product',checkAuth,routerProduct);
 app.use('/category',checkAuth,routerCategory);
+app.use('/cart',checkAuth,routerCart);
 app.use('/user',routerUser);
 app.use('/',routerComon);
 //
