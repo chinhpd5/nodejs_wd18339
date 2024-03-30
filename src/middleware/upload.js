@@ -1,5 +1,6 @@
 //npm i multer
 import multer from "multer";
+import path from 'path'
 
 const storage = multer.diskStorage({
     // khai báo nơi lưu trữ file
@@ -7,8 +8,10 @@ const storage = multer.diskStorage({
         callback(null,'src/uploads')
     },
     filename: (req, file,callback)=>{
-        console.log(file);
-        callback(null,file.originalname);
+        // console.log(file);
+        const filename = Date.now() + path.extname(file.originalname);
+        req.body.image = filename;
+        callback(null,filename);
     }
 })
 
