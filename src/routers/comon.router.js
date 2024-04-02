@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import {upload} from '../middleware/upload.js'
+import {upload,MultiUpload} from '../middleware/upload.js'
 import {Upload as uploadToDB} from '../controllers/common.controller.js'
 
 router.get('/', (req, res) => {
@@ -12,5 +12,6 @@ router.get('/tintuc', (req, res) => {
 })
 
 router.post('/upload',upload.single("image"),uploadToDB)
+router.post('/multiupload',MultiUpload.array('images'),()=>{})
 
 export default router;
