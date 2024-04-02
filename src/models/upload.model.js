@@ -5,6 +5,14 @@ const uploadSchema = new mongoose.Schema(
     {
         image: {
             type: String
+        },
+        images:[
+            {
+                type: String
+            }
+        ],
+        type:{
+            type: Number
         }
     }
 )
